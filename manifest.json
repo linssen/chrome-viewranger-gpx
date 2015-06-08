@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Viewranger GPX downloader",
+  "description": "Lets you download GPX files from viewranger",
+  "version": "1.0",
+
+  "permissions": [
+    "http://my.viewranger.com/route/details/*",
+    "https://my.viewranger.com/route/details/*"
+  ],
+
+  "web_accessible_resources": ["js/injected.js"],
+
+  "content_scripts": [
+    {
+        "js": ["js/FileSaver.min.js", "js/content_script.js"],
+        "run_at": "document_end",
+        "matches": [
+            "http://my.viewranger.com/route/details/*",
+            "https://my.viewranger.com/route/details/*"
+        ]
+    }
+  ]
+
+}
