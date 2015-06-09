@@ -1,3 +1,4 @@
+/* global chrome, saveAs */
 (function() {
     'use strict';
 
@@ -26,12 +27,14 @@
 
     // Listen for the message from the injected script with out route
     window.addEventListener('message', function(event) {
+        if (event.data.type !== 'gpxReady') { return; }
         route = event.data.route;
         points = route.routeJson.routes[0].points;
     });
 
     // String formatting for each waypoint XML node
-    function formatWaypoint(point) {
+    function formatWaypoint(point, index) {
+        point.name = point.name || 'waypoint-' + index;
         return waypoint
             .replace('{{lat}}', point.lat)
             .replace('{{lon}}', point.lon)
