@@ -7,16 +7,15 @@
     var link = document.createElement('a');
     var gpx =
         '<?xml version="1.0" encoding="UTF-8"?>\n' +
-        '<gpx xmlns="http://www.topografix.com/GPX/1/0" version="1.0">\n' +
-        '  <rte>\n' +
-        '    <name><![CDATA[{{name}}]]></name>\n' +
+        '<gpx version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">\n' +
+        '  <trk>\n' +
+        '    <name>{{name}}</name>\n' +
+        '    <trkseg>\n' +
                '{{waypoints}}\n' +
-        '    </rte>\n' +
-        '</gpx>\n\n';
-    var waypoint =
-        '      <rtept lat="{{lat}}" lon="{{lon}}">\n' +
-        '        <name>{{name}}</name>\n' +
-        '      </rtept>';
+        '    </trkseg>\n' +
+        '  </trk>\n' +
+        '</gpx>\n';
+    var waypoint = '      <trkpt lat="{{lat}}" lon="{{lon}}"/>';
     var injected = document.createElement('script');
     var points;
     var route;
