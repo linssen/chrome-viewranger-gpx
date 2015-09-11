@@ -3,7 +3,7 @@
 
   "name": "Viewranger GPX downloader",
   "description": "Lets you download GPX files from viewranger",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "permissions": [
     "http://my.viewranger.com/route/details/*",
