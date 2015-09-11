@@ -29,6 +29,29 @@
     }
 
     /**
+     * Standard issue slugify
+     *
+     * @param {String} str - The string to slugify
+     * @return {String}
+     */
+    GPXBuilder.prototype.slugify = function(str) {
+        var from = 'àáäãâèéëêìíïîòóöôõùúüûñç·/_,:;';
+        var to = 'aaaaaeeeeiiiiooooouuuunc------';
+        var i = 0;
+        var len = from.length;
+
+        str = str.toLowerCase();
+
+        for( ; i < len; i++ ){
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        return str.replace(/^\s+|\s+$/g, '')
+            .replace(/[^-a-zA-Z0-9\s]+/ig, '')
+            .replace(/\s/gi, "-");
+    };
+
+    /**
      * Create the link in the menu and bind it's click to our download
      */
     GPXBuilder.prototype.buildLink = function() {
@@ -68,15 +91,19 @@
      */
     GPXBuilder.prototype.download = function(e) {
         var blob;
+        var filename;
         var gpx;
+
         e.preventDefault();
+
+        filename = this.slugify(this.route.shortDescription) + '.gpx';
         gpx = this.gpxTemplate
             .replace('{{name}}', this.route.shortDescription)
             .replace('{{waypoints}}', this.points.map(
                 this.formatWaypoint.bind(this)
             ).join('\n'));
         blob = new Blob([gpx], {type: 'text/plain;charset=utf-8'});
-        saveAs(blob, this.route.routeId + '.gpx');
+        saveAs(blob, filename);
     };
 
     // Inject script to provide our global objec
