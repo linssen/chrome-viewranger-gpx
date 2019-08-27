@@ -55,17 +55,15 @@
      * Create the link in the menu and bind it's click to our download
      */
     GPXBuilder.prototype.buildLink = function() {
-        var menu = document.querySelector('.dropit-submenu');
-        var li = document.createElement('li');
+        var menu = document.querySelector('.rdmenucenter');
         var link = document.createElement('a');
 
         // Add the link to our page
         link.setAttribute('href', '#');
         link.text = 'Download GPX';
-        menu.appendChild(li);
-        li.appendChild(link);
-
+        link.setAttribute('style', 'float:left;line-height:25px;color:white;margin-right:5px;')
         link.onclick = this.download.bind(this);
+        menu.prepend(link);
     };
 
     /**
